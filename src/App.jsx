@@ -1,20 +1,16 @@
-import { useEffect } from 'react'
 import './App.css'
-import { fetchDataFromApi } from './utilities/api'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from './layout/Navbar/Navbar';
+import Home from './pages/Home/Home';
 
 function App() {
-  useEffect(() => {
-    getData()
-  }, [])
-  const getData = () => {
-    fetchDataFromApi('/movie/popular')
-      .then((res) => {
-        console.log(res);
-      })
-  }
   return (
-    <>
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -1,0 +1,14 @@
+.menu-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+    align-items: center;
+}
+.links{
+    display: flex;
+    gap: 30px;
+}
+.link{
+    list-style: none;
+    color: white;
+}
