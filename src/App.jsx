@@ -1,10 +1,13 @@
-import './App.css'
 import { useEffect } from 'react';
 import { BrowserRouter as Routers, Routes, Route } from "react-router-dom";
+
 import Navbar from './layout/Navbar/Navbar';
 import Home from './pages/Home/Home';
+import Footer from './layout/Footer/Footer';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { getApiConfiguration } from './store/homeSlice';
+
 import useFetch from './hooks/useFetch';
 import { fetchDataFromApi } from './utilities/api';
 
@@ -34,6 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
+      <Footer/>
     </Routers>
   )
 }

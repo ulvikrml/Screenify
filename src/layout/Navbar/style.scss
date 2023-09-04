@@ -1,15 +1,53 @@
-.menu-container{
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0px;
-    align-items: center;
+@import "../../mixin.scss";
+
+nav {
     position: fixed;
-    .links{
-        display: flex;
-        gap: 30px;
-        .link{
-            list-style: none;
-            color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    .container {
+
+        .menu-container {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 20px 0px;
+            align-items: center;
+
+            .desktop-menu {
+                list-style-type: none;
+                display: none;
+                align-items: center;
+                gap: 30px;
+
+                @include md {
+                    display: flex;
+                }
+
+                .link {
+                    height: 60px;
+                    display: flex;
+                    align-items: center;
+                    margin: 0 15px;
+                    color: white;
+                    font-weight: 500;
+                    position: relative;
+                }
+            }
+
+            // .mobile-menu{
+            //     display: none;
+            //     align-items: center;
+            //     gap: 20px;
+            //     @include md {
+            //         display: none;
+            //     }
+            //     svg {
+            //         font-size: 18px;
+            //         color: white;
+            //     }
+            // }
         }
     }
 }
