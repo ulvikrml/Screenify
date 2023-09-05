@@ -1,9 +1,11 @@
 import HeroBanner from "../../components/HeroBanner/HeroBanner"
+import Trending from "../../components/Trending/Trending"
 const Home = () => {
   return (
-    <div>
-      <HeroBanner></HeroBanner>
-    </div>
+    <main>
+      <HeroBanner/>
+      <Trending/>
+    </main>
   )
 }
 

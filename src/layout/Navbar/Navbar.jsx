@@ -8,9 +8,32 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
     // const [isOpen, setIsOpen] = useState(false);
+    const [show, setShow] = useState("top");   
+    const [lastScrollY, setLastScrollY] = useState(0);
+
     const [isMobileMenu, setIsMobileOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const navigate = useNavigate();
+
+    const controlNavbar = () => {
+        if (window.scrollY > 200) {
+            if (window.scrollY > lastScrollY) {
+                setShow("hide");
+            } else {
+                setShow("show");
+            }
+        } else {
+            setShow("top");
+        }
+        setLastScrollY(window.scrollY);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", controlNavbar);
+        return () => {
+            window.removeEventListener("scroll", controlNavbar);
+        };
+    }, [lastScrollY]);
 
     const openSearch = () => {
         console.log('close');
@@ -24,7 +47,7 @@ const Navbar = () => {
         setIsSearchOpen(false)
     };
     return (
-        <nav className={`header ${isMobileMenu ? "mobileView" : ""} ${isSearchOpen}`}>
+        <nav className={`header ${isMobileMenu ? "mobileView" : ""} ${show}`}>
             <div className="container">
                 <div className="menu-container">
                     <div className="logo-container">

@@ -7,13 +7,13 @@ const HeroBanner = () => {
   const [background, setBackground] = useState("");
   const { data, loading } = useFetch('/movie/upcoming')
   const { url } = useSelector(state => state.home)
-  console.log(data);
+  
   useEffect(() => {
     const bgImage = url.backdrop + data?.results[Math.floor(Math.random() * 20)]?.backdrop_path
     setBackground(bgImage)
   }, [data, url.backdrop])
   return (
-    <div className='heroBanner'>
+    <section className='heroBanner'>
       <div className="backdrop-image">
         <Image src={background} />
       </div>
@@ -32,7 +32,7 @@ const HeroBanner = () => {
           <button>Search</button>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

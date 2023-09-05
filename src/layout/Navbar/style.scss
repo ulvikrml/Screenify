@@ -6,48 +6,66 @@ nav {
     left: 0;
     right: 0;
     z-index: 10;
-    .container {
+    transition: all ease 0.5s;
 
-        .menu-container {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            padding: 20px 0px;
+    &.top {
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(3.5px);
+        -webkit-backdrop-filter: blur(3.5px);
+    }
+
+    &.show {
+        background-color: var(--black3);
+    }
+
+    &.hide {
+        transform: translateY(-60px);
+    }
+
+    .menu-container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding: 8px 0px;
+        align-items: center;
+        .logo-container{
+            img{
+                width: 150px;
+            }
+        }
+        .desktop-menu {
+            list-style-type: none;
+            display: none;
             align-items: center;
+            gap: 30px;
 
-            .desktop-menu {
-                list-style-type: none;
-                display: none;
-                align-items: center;
-                gap: 30px;
-
-                @include md {
-                    display: flex;
-                }
-
-                .link {
-                    height: 60px;
-                    display: flex;
-                    align-items: center;
-                    margin: 0 15px;
-                    color: white;
-                    font-weight: 500;
-                    position: relative;
-                }
+            @include md {
+                display: flex;
             }
 
-            // .mobile-menu{
-            //     display: none;
-            //     align-items: center;
-            //     gap: 20px;
-            //     @include md {
-            //         display: none;
-            //     }
-            //     svg {
-            //         font-size: 18px;
-            //         color: white;
-            //     }
-            // }
+            .link {
+                height: 60px;
+                display: flex;
+                align-items: center;
+                margin: 0 15px;
+                color: white;
+                font-weight: 500;
+                position: relative;
+            }
         }
+
+        // .mobile-menu{
+        //     display: none;
+        //     align-items: center;
+        //     gap: 20px;
+        //     @include md {
+        //         display: none;
+        //     }
+        //     svg {
+        //         font-size: 18px;
+        //         color: white;
+        //     }
+        // }
     }
+
 }
