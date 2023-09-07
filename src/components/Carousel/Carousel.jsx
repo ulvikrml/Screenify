@@ -9,7 +9,7 @@ import PosterFallback from "../../assets/no-poster.png";
 import "./style.scss";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation} from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -18,12 +18,23 @@ const Carousel = ({ data, loading }) => {
     const navigate = useNavigate();
     const { url } = useSelector(state => state.home);
     console.log('carousel');
+    const skItem = () => {
+        return (
+            <div className="skeletonItem">
+                <div className="posterBlock skeleton"></div>
+                <div className="textBlock">
+                    <div className="title skeleton"></div>
+                    <div className="date skeleton"></div>
+                </div>
+            </div>
+        );
+    };
     return (
         <div className="carousel">
             <div className="container">
                 <Swiper
                     spaceBetween={10}
-                    slidesPerView={3}
+                    slidesPerView={3.5}
                     className="carouselItems"
                     modules={[Navigation]}
                     navigation
@@ -31,16 +42,16 @@ const Carousel = ({ data, loading }) => {
                     speed={600}
                     breakpoints={{
                         640: {
-                          slidesPerView: 4,
-                          spaceBetween: 15,
+                            slidesPerView: 4,
+                            spaceBetween: 15,
                         },
                         768: {
-                          slidesPerView: 5,
-                          spaceBetween: 20,
+                            slidesPerView: 5,
+                            spaceBetween: 20,
                         }
-                      }}
+                    }}
                 >
-                    {
+                    {!loading ? (
                         data?.map((item) => {
                             const posterUrl = item.poster_path ? url.poster + item.poster_path : PosterFallback
                             return (
@@ -50,15 +61,16 @@ const Carousel = ({ data, loading }) => {
                                     </div>
                                 </SwiperSlide>
                             )
-                        })
+                        })) : (
+                            <div className="loadingSkeleton">
+                                {skItem()}
+                                {skItem()}
+                                {skItem()}
+                                {skItem()}
+                                {skItem()}
+                            </div>
+                        )   
                     }
-                    {/* <SwiperSlide>Slide 2</SwiperSlide>
-                    <SwiperSlide>Slide 3</SwiperSlide>
-                    <SwiperSlide>Slide 4</SwiperSlide>
-                    <SwiperSlide>Slide 4</SwiperSlide>
-                    <SwiperSlide>Slide 4</SwiperSlide>
-                    <SwiperSlide>Slide 4</SwiperSlide>
-                    ... */}
                 </Swiper>
             </div>
         </div>
