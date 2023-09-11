@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import SwitchTabs from '../SwitchTabs/SwitchTabs'
 import Carousel from '../Carousel/Carousel'
 import useFetch from "../../hooks/useFetch"
@@ -6,7 +7,6 @@ import useFetch from "../../hooks/useFetch"
 const TopRated = () => {
   const [endpoint, setEndpoint] = useState("movie");
   const { data, loading } = useFetch(`/${endpoint}/top_rated`);
-  console.log(data);
   const onChangeTab = (tab) => {
     setEndpoint(tab === 'Movie' ? 'movie' : 'tv')
   }
@@ -16,7 +16,7 @@ const TopRated = () => {
         <h3 className='sec-title'>Top Rated</h3>
         <SwitchTabs tabs={['Movie', 'TV Shows']} onChangeTab={onChangeTab} />
       </div>
-      <Carousel data={data?.results} loading={loading}/>
+      <Carousel data={data?.results} loading={loading} endpoint={endpoint}/>
     </section>
   )
 }

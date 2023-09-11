@@ -9,13 +9,13 @@ const HeroBanner = () => {
   const { url } = useSelector(state => state.home)
   
   useEffect(() => {
-    const bgImage = url.backdrop + data?.results[Math.floor(Math.random() * 20)]?.backdrop_path
+    const bgImage = url?.backdrop + data?.results[Math.floor(Math.random() * 20)]?.backdrop_path
     setBackground(bgImage)
   }, [data, url.backdrop])
   return (
     <section className='heroBanner'>
       <div className="backdrop-image">
-        <Image src={background} />
+        <Image src={background || ''} />
       </div>
       <div className="opacity-layer"></div>
       <div className="heroBanner-content">

@@ -14,10 +14,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endpoint }) => {
     const navigate = useNavigate();
     const { url } = useSelector(state => state.home);
-    console.log('carousel');
+    // console.log('carousel');
     const skItem = () => {
         return (
             <div className="skeletonItem">
@@ -55,7 +55,14 @@ const Carousel = ({ data, loading }) => {
                         data?.map((item) => {
                             const posterUrl = item.poster_path ? url.poster + item.poster_path : PosterFallback
                             return (
-                                <SwiperSlide key={item.id} className="carouselItem">
+                                <SwiperSlide key={item.id} className="carouselItem" 
+                                onClick={() =>
+                                    navigate(
+                                        `/${item.media_type || endpoint}/${
+                                            item.id
+                                        }`
+                                    )
+                                }>
                                     <div className="poster">
                                         <Image src={posterUrl} />
                                     </div>
