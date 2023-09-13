@@ -17,7 +17,6 @@ import 'swiper/css/navigation';
 const Carousel = ({ data, loading, endpoint }) => {
     const navigate = useNavigate();
     const { url } = useSelector(state => state.home);
-    // console.log('carousel');
     const skItem = () => {
         return (
             <div className="skeletonItem">

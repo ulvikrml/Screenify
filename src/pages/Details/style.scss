@@ -1,0 +1,15 @@
+.details-section{
+    margin-bottom: 50px;
+    .carousels {
+        gap: 60px;
+        display: flex;
+        flex-direction: column;
+        
+        .carousel-title {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+    }
+}
