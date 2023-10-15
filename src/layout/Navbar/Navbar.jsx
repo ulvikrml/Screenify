@@ -2,9 +2,8 @@ import logo from "../../assets/screenify-logo.svg";
 import './style.scss'
 import { HiOutlineSearch } from "react-icons/hi";
 import React, { useState, useEffect } from "react";
-import { SlMenu } from "react-icons/sl";
-import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     // const [isOpen, setIsOpen] = useState(false);
@@ -51,11 +50,17 @@ const Navbar = () => {
             <div className="container">
                 <div className="menu-container">
                     <div className="logo-container">
+                        <Link to='/'>
                         <img src={logo} alt="logo" />
+                        </Link>
                     </div>
                     <ul className="desktop-menu menu">
-                        <li className="link">Movies</li>
-                        <li className="link">TV Shows</li>
+                        <li className="link">
+                            <Link to='/explore/movie'>Movies</Link>
+                        </li>
+                        <li className="link">
+                        <Link to='/explore/tv'>TV Shows</Link>
+                        </li>
                         <li className="link">
                             <HiOutlineSearch />
                         </li>

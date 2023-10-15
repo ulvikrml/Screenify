@@ -5,6 +5,8 @@ import Navbar from './layout/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import Footer from './layout/Footer/Footer';
 import Details from './pages/Details/Details';
+import PageNotFound from './pages/404/PageNotFound'
+import Explore from './pages/Explore/Explore';
 
 import { useDispatch } from 'react-redux';
 import { getApiConfiguration } from './store/homeSlice';
@@ -35,6 +37,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:mediaType/:id" element={<Details />} />
+        <Route path="*" element={<PageNotFound />} />
+        <Route path="/explore/:mediaType" element={<Explore />} />
       </Routes>
       <Footer/>
     </Routers>
