@@ -7,6 +7,7 @@ import Footer from './layout/Footer/Footer';
 import Details from './pages/Details/Details';
 import PageNotFound from './pages/404/PageNotFound'
 import Explore from './pages/Explore/Explore';
+import SearchResult from './pages/Search/SearchResult';
 
 import { useDispatch } from 'react-redux';
 import { getApiConfiguration } from './store/homeSlice';
@@ -37,6 +38,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:mediaType/:id" element={<Details />} />
+        <Route path="/search/:query" element={<SearchResult />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/explore/:mediaType" element={<Explore />} />
       </Routes>

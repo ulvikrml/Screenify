@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 
 import "./style.scss";
 import Image from "../LazyLoadImage/Image";
-// import CircleRating from "../circleRating/CircleRating";
-// import Genres from "../genres/Genres";
+import CircleRating from "../CircleRating/CircleRating";
+import Genres from "../Genres/Genres";
 import PosterFallback from "../../assets/no-poster.png";
 
 const MovieCard = ({ data, fromSearch, mediaType }) => {
@@ -26,8 +26,8 @@ const MovieCard = ({ data, fromSearch, mediaType }) => {
                 <Image className="posterImg" src={posterUrl} />
                 {!fromSearch && (
                     <React.Fragment>
-                        {/* <CircleRating rating={data.vote_average.toFixed(1)} />
-                        <Genres data={data.genre_ids.slice(0, 2)} /> */}
+                        <CircleRating rating={data.vote_average.toFixed(1)} />
+                        <Genres data={data.genre_ids.slice(0, 2)} />
                     </React.Fragment>
                 )}
             </div>

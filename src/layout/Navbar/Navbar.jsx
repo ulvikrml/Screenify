@@ -1,22 +1,28 @@
-import logo from "../../assets/screenify-logo.svg";
-import './style.scss'
-import { HiOutlineSearch } from "react-icons/hi";
 import React, { useState, useEffect } from "react";
+import { HiOutlineSearch } from "react-icons/hi";
+import { SlMenu } from "react-icons/sl";
+import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
 
-const Navbar = () => {
-    // const [isOpen, setIsOpen] = useState(false);
-    const [show, setShow] = useState("top");   
+import "./style.scss";
+import logo from '../../assets/screenify-logo.svg'
+
+const Header = () => {
+    const [show, setShow] = useState("top");
     const [lastScrollY, setLastScrollY] = useState(0);
-
-    const [isMobileMenu, setIsMobileOpen] = useState(false);
-    const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [mobileMenu, setMobileMenu] = useState(false);
+    const [query, setQuery] = useState("");
+    const [showSearch, setShowSearch] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
 
     const controlNavbar = () => {
         if (window.scrollY > 200) {
-            if (window.scrollY > lastScrollY) {
+            if (window.scrollY > lastScrollY && !mobileMenu) {
                 setShow("hide");
             } else {
                 setShow("show");
@@ -34,47 +40,111 @@ const Navbar = () => {
         };
     }, [lastScrollY]);
 
+    const searchQueryHandler = (event) => {
+        if (event.key === "Enter" && query.length > 0) {
+            navigate(`/search/${query}`);
+            setTimeout(() => {
+                setShowSearch(false);
+            }, 1000);
+        }
+    };
+
     const openSearch = () => {
-        console.log('close');
-        setIsMobileOpen(false);
-        setIsSearchOpen(true);
+        setMobileMenu(false);
+        setShowSearch(true);
     };
 
     const openMobileMenu = () => {
-        console.log('open');
-        setIsMobileOpen(true);
-        setIsSearchOpen(false)
+        setMobileMenu(true);
+        setShowSearch(false);
     };
+
+    const navigationHandler = (type) => {
+        if (type === "movie") {
+            navigate("/explore/movie");
+        } else {
+            navigate("/explore/tv");
+        }
+        setMobileMenu(false);
+    };
+
     return (
-        <nav className={`header ${isMobileMenu ? "mobileView" : ""} ${show}`}>
+        <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
+
             <div className="container">
                 <div className="menu-container">
-                    <div className="logo-container">
-                        <Link to='/'>
-                        <img src={logo} alt="logo" />
-                        </Link>
+                    <div className="logo" onClick={() => navigate("/")}>
+                        <img src={logo} alt="" />
+
                     </div>
-                    <ul className="desktop-menu menu">
-                        <li className="link">
-                            <Link to='/explore/movie'>Movies</Link>
+                    <div className="mobileMenuItems">
+                        <HiOutlineSearch onClick={openSearch} />
+                        {mobileMenu ? (
+                            <VscChromeClose onClick={() => setMobileMenu(false)} />
+                        ) : (
+                            <SlMenu onClick={openMobileMenu} />
+                        )}
+                    </div>
+                    <ul className="menuItems">
+                        <li
+                            className="menuItem"
+                            onClick={() => navigationHandler("movie")}
+                        >
+                            Movies
                         </li>
-                        <li className="link">
-                        <Link to='/explore/tv'>TV Shows</Link>
+                        <li
+                            className="menuItem"
+                            onClick={() => navigationHandler("tv")}
+                        >
+                            TV Shows
                         </li>
-                        <li className="link">
-                            <HiOutlineSearch />
+                        <li className="menuItem">
+                            <HiOutlineSearch onClick={openSearch} />
                         </li>
                     </ul>
-                    {/* <div className="mobile-menu menu">
-                        <HiOutlineSearch />
-                        {
-                            isMobileMenu ? <VscChromeClose onClick={() => setIsMobileOpen(false)} /> : <SlMenu onClick={openMobileMenu} />
-                        }
-                    </div> */}
                 </div>
             </div>
-        </nav>
-    )
-}
 
-export default Navbar
+            <div className="container">
+                <ul className="menuItemsMain">
+                    <li
+                        className="menuItem"
+                        onClick={() => navigationHandler("movie")}
+                    >
+                        Movies
+                    </li>
+                    <li
+                        className="menuItem"
+                        onClick={() => navigationHandler("tv")}
+                    >
+                        TV Shows
+                    </li>
+                    <li className="menuItem">
+                        <HiOutlineSearch onClick={openSearch} />
+                    </li>
+                </ul>
+            </div>
+
+
+            {showSearch && (
+                <div className="searchBar">
+                    <div className="container">
+                        <div className="searchInput">
+                            <input
+                                type="text"
+                                placeholder="Search for a movie or tv show...."
+                                onChange={(e) => setQuery(e.target.value)}
+                                onKeyUp={searchQueryHandler}
+                            />
+                            <VscChromeClose
+                                onClick={() => setShowSearch(false)}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+        </header>
+    );
+};
+
+export default Header;
