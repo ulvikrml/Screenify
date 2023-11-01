@@ -5,8 +5,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import "./style.scss";
 
 import { fetchDataFromApi } from "../../utilities/api";
-import MovieCard from "../../components/movieCard/MovieCard";
-import Spinner from "../../components/spinner/Spinner";
+import MovieCard from "../../components/MovieCard/MovieCard";
+import Spinner from "../../components/Spinner/Spinner";
 import noResults from "../../assets/no-results.png";
 
 const SearchResult = () => {
